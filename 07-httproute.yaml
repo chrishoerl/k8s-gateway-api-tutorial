@@ -10,12 +10,29 @@ spec:
   hostnames:
     - localhost
   rules:
+    # this rule rquires a query like this to match
+    # curl -H 'X-My-Header:foobar' http://localhost:8080/service-a?fruit=apple
     - matches:
         - path:
             type: PathPrefix
-            value: /service-a
+            value: "/service-a"
+          queryParams:
+            - name: fruit
+              value: "apple"
+              type: Exact
+          headers:
+            - name: "X-My-Header"
+              value: "foobar"
       backendRefs:
         - name: service-a
+          port: 8080
+    # if none of the above matches push every request to site-b
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/service-a"
+      backendRefs:
+        - name: service-b
           port: 8080
 ---
 apiVersion: gateway.networking.k8s.io/v1beta1
