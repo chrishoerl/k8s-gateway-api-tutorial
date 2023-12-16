@@ -191,3 +191,8 @@ https://docs.nginx.com/nginx-gateway-fabric/installation/installing-ngf/manifest
 https://github.com/nginxinc/nginx-gateway-fabric/blob/main/README.md#technical-specifications
 
 https://github.com/nginxinc/nginx-gateway-fabric/tree/v1.1.0/deploy/manifests
+
+#### in question
+
+- only deployment is currently supported - waiting for ds
+- how to create HA
