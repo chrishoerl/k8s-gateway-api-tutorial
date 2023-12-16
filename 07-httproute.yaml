@@ -1,0 +1,39 @@
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: service-a
+  namespace: default
+spec:
+  parentRefs:
+    - name: combined-gateway
+      sectionName: http
+  hostnames:
+    - localhost
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /service-a
+      backendRefs:
+        - name: service-a
+          port: 8080
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: service-b
+  namespace: default
+spec:
+  parentRefs:
+    - name: combined-gateway
+      sectionName: http
+  hostnames:
+    - localhost
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /service-b
+      backendRefs:
+        - name: service-b
+          port: 8080
